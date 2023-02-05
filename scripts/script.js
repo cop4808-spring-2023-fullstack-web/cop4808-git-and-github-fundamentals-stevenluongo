@@ -41,6 +41,9 @@ function clickButton() {
       } else if (buttons[i].classList.contains("sign")) {
         inputSign(displayValue);
         updateDisplay();
+      } else if (buttons[i].classList.contains("sqrt")) {
+        inputSqrt(displayValue);
+        updateDisplay();
       } else if (buttons[i].classList.contains("clear")) clearDisplay();
       updateDisplay();
     });
@@ -202,4 +205,11 @@ function operate(x, y, op) {
 
 function roundAccurately(num, places) {
   return parseFloat(Math.round(num + "e" + places) + "e-" + places);
+}
+
+// ******* NEW FUNCTIONS ****** //
+
+//function to handle square root input
+function inputSqrt(num) {
+  displayValue = Math.sqrt(num).toString();
 }
