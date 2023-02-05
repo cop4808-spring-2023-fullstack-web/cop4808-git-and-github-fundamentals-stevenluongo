@@ -1,110 +1,116 @@
 html {
-    text-align: center;
-    font-family: monospace;
+  text-align: center;
+  font-family: monospace;
 }
 
 #calc {
-    display: flex;
-    min-height: 95vh;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden;
-    background-color: azure;
+  display: flex;
+  min-height: 95vh;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  background-color: azure;
 }
 
 #container {
-    background-color: black;
-    border: 10px solid rgba(47,47,47,1);
-    border-radius: 4px;
-    display: grid;
-    grid-template-columns: repeat(4, 100px);
-    grid-template-rows: minmax(100px, auto) repeat(5, 80px);
-    gap: 2px;
+  background-color: black;
+  border: 10px solid rgba(47, 47, 47, 1);
+  border-radius: 4px;
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  /* update grid template rows to include the addition of the new row */
+  grid-template-rows: minmax(100px, auto) repeat(6, 80px);
+  gap: 2px;
 }
 
 #display {
-    grid-column: 1 / -1;
-    background-color: #b2b9b7;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-end;
-    padding: 5px;
-    font-size: 5.5em;
-    font-weight: initial;
-    text-shadow: 1.3px 1.3px #383838;
-    margin: 5px;
+  grid-column: 1 / -1;
+  background-color: #b2b9b7;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-end;
+  padding: 5px;
+  font-size: 5.5em;
+  font-weight: initial;
+  text-shadow: 1.3px 1.3px #383838;
+  margin: 5px;
 }
 
 button {
-    margin: 1px;
-    border-radius: 5%;
-    border: none;
-    font-weight: initial;
-    font-size: 2em;
-    font-family: monospace;
-    color: black;
+  margin: 1px;
+  border-radius: 5%;
+  border: none;
+  font-weight: initial;
+  font-size: 2em;
+  font-family: monospace;
+  color: black;
 }
 
-
 #zero {
-    grid-column: span 2;
+  grid-column: span 2;
 }
 
 .operator {
-    background-color: #FF8F1F;    
+  background-color: #ff8f1f;
 }
 
 .operator:focus {
-    background-color: #ffc183;
+  background-color: #ffc183;
 }
 
 .equals {
-    background-color: #FF8F1F;
+  background-color: #ff8f1f;
 }
 
 .equals:active {
-    background-color: #ffc183;
+  background-color: #ffc183;
 }
 
 .operand {
-    background-color: #217C7E;
+  background-color: #217c7e;
 }
 
 .operand:active {
-    background-color: #33b9bb;
+  background-color: #33b9bb;
 }
 
 .decimal {
-    background-color: #217C7E;
+  background-color: #217c7e;
 }
 
 .decimal:active {
-    background-color: #33b9bb;
+  background-color: #33b9bb;
 }
 
 .clear {
-    background-color: dodgerblue;
+  background-color: dodgerblue;
 }
 
 .clear:active {
-    background-color: rgb(123, 189, 255);
+  background-color: rgb(123, 189, 255);
 }
 
 .sign {
-    background-color: dodgerblue;
+  background-color: dodgerblue;
 }
 
 .sign:active {
-    background-color: rgb(123, 189, 255);
+  background-color: rgb(123, 189, 255);
 }
 
 .percent {
-    background-color: dodgerblue;
+  background-color: dodgerblue;
 }
 
 .percent:active {
-    background-color: rgb(123, 189, 255);
+  background-color: rgb(123, 189, 255);
+}
+
+/* New button class */
+.symbol {
+  font-weight: bold;
+  background-color: antiquewhite;
 }
