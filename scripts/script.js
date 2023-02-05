@@ -50,7 +50,8 @@ function clickButton() {
         updateDisplay();
       } else if (buttons[i].classList.contains("pi")) {
         inputPi(buttons[i].value);
-        //clear display
+      } else if (buttons[i].classList.contains("e")) {
+        inputE(buttons[i].value);
       } else if (buttons[i].classList.contains("clear")) clearDisplay();
       updateDisplay();
     });
@@ -244,6 +245,12 @@ function inputPi(value) {
   updateDisplay();
 }
 
+//function to handle e inputs
+function inputE(value) {
+  inputOperand(value);
+  updateDisplay();
+}
+
 //loops over the operands
 //calculates special symbols such as pi and e
 function calculateSymbols(firstOperand, secondOperand) {
@@ -274,6 +281,9 @@ function calculateUpdatedOperand(operand) {
     //check for pi
     case "π":
       return 3.14159265359;
+    //check for e
+    case "e":
+      return 2.71828183;
     //default case, i.e. current value is a number
     default:
       return Number(operand);
