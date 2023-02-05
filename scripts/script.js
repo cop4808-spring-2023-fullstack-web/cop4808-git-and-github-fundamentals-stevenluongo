@@ -44,6 +44,9 @@ function clickButton() {
       } else if (buttons[i].classList.contains("sqrt")) {
         inputSqrt(displayValue);
         updateDisplay();
+      } else if (buttons[i].classList.contains("squared")) {
+        inputSquared(displayValue);
+        updateDisplay();
       } else if (buttons[i].classList.contains("clear")) clearDisplay();
       updateDisplay();
     });
@@ -212,4 +215,9 @@ function roundAccurately(num, places) {
 //function to handle square root input
 function inputSqrt(num) {
   displayValue = Math.sqrt(num).toString();
+}
+
+//function to handle squared input
+function inputSquared(num) {
+  displayValue = (num * num).toString();
 }
