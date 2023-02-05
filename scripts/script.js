@@ -41,12 +41,16 @@ function clickButton() {
       } else if (buttons[i].classList.contains("sign")) {
         inputSign(displayValue);
         updateDisplay();
+        //new button handlers
       } else if (buttons[i].classList.contains("sqrt")) {
         inputSqrt(displayValue);
         updateDisplay();
       } else if (buttons[i].classList.contains("squared")) {
         inputSquared(displayValue);
         updateDisplay();
+      } else if (buttons[i].classList.contains("pi")) {
+        inputPi(buttons[i].value);
+        //clear display
       } else if (buttons[i].classList.contains("clear")) clearDisplay();
       updateDisplay();
     });
@@ -81,12 +85,14 @@ function inputOperator(operator) {
     //4th click - handles input of second operator
     secondOperator = operator;
     secondOperand = displayValue;
-
-    result = operate(
-      Number(firstOperand),
-      Number(secondOperand),
-      firstOperator
+    //need to update the operands if they include symbols such as pi
+    const { updatedFirstOperand, updatedSecondOperand } = calculateSymbols(
+      firstOperand,
+      secondOperand
     );
+
+    //calculate result
+    result = operate(updatedFirstOperand, updatedSecondOperand, firstOperator);
 
     //update display value
     displayValue = roundAccurately(result, 15).toString();
@@ -95,11 +101,15 @@ function inputOperator(operator) {
   } else if (firstOperator != null && secondOperator != null) {
     //6th click - new secondOperator
     secondOperand = displayValue;
-    result = operate(
-      Number(firstOperand),
-      Number(secondOperand),
-      firstOperator
+
+    //need to update the operands if they include symbols such as pi
+    const { updatedFirstOperand, updatedSecondOperand } = calculateSymbols(
+      firstOperand,
+      secondOperand
     );
+
+    //calculate result
+    result = operate(updatedFirstOperand, updatedSecondOperand, secondOperand);
     secondOperator = operator;
     displayValue = roundAccurately(result, 15).toString();
     firstOperand = displayValue;
@@ -119,11 +129,14 @@ function inputEquals() {
     //handles final result
     secondOperand = displayValue;
 
-    result = operate(
-      Number(firstOperand),
-      Number(secondOperand),
-      firstOperator
+    //need to update the operands if they include symbols such as pi
+    const { updatedFirstOperand, updatedSecondOperand } = calculateSymbols(
+      firstOperand,
+      secondOperand
     );
+
+    //calculate result
+    result = operate(updatedFirstOperand, updatedSecondOperand, secondOperator);
 
     if (result === "lmao") {
       displayValue = "lmao";
@@ -139,11 +152,14 @@ function inputEquals() {
     //handles first operation
     secondOperand = displayValue;
 
-    result = operate(
-      Number(firstOperand),
-      Number(secondOperand),
-      firstOperator
+    //need to update the operands if they include symbols such as pi
+    const { updatedFirstOperand, updatedSecondOperand } = calculateSymbols(
+      firstOperand,
+      secondOperand
     );
+
+    //calculate result
+    result = operate(updatedFirstOperand, updatedSecondOperand, firstOperator);
     if (result === "lmao") {
       displayValue = "lmao";
     } else {
@@ -220,4 +236,46 @@ function inputSqrt(num) {
 //function to handle squared input
 function inputSquared(num) {
   displayValue = (num * num).toString();
+}
+
+//function to handle pi inputs
+function inputPi(value) {
+  inputOperand(value);
+  updateDisplay();
+}
+
+//loops over the operands
+//calculates special symbols such as pi and e
+function calculateSymbols(firstOperand, secondOperand) {
+  //init total variables
+  let updatedFirstOperand = 0,
+    updatedSecondOperand = 0;
+
+  //loop over first operand
+  for (let i = 0; i < firstOperand.length; i++) {
+    //calculate updated operand
+    updatedFirstOperand += calculateUpdatedOperand(firstOperand[i]);
+  }
+
+  //loop over second operand
+  for (let i = 0; i < secondOperand.length; i++) {
+    //calculate updated operand
+    updatedSecondOperand += calculateUpdatedOperand(secondOperand[i]);
+  }
+
+  //return updated operands
+  return { updatedFirstOperand, updatedSecondOperand };
+}
+
+//checks for symbols in the current operand
+//returns the respective value of symbol or number
+function calculateUpdatedOperand(operand) {
+  switch (operand) {
+    //check for pi
+    case "π":
+      return 3.14159265359;
+    //default case, i.e. current value is a number
+    default:
+      return Number(operand);
+  }
 }
